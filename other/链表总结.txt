@@ -1,0 +1,15 @@
+
+对于一个长度为N的链表
+
+1、从左向右找到第N个节点
+技巧： cur=head,从左向右游标,需要移动N-1次，即循环N-1次
+
+2、从左向右找到倒数第N个节点
+技巧：快慢指针，slow=fast=head,fast需要比slow先移动N次，即先循环N次，然后slow、fast同时移动
+
+3、找到中间节点,即对于N为偶数，找到第N/2个节点，对于奇数，找到第N/2+1个节点
+技巧：快慢指针，slow=head,fast=head.Next，
+for fast != nil && fast.Next != nil {
+    fast =fast.Next.Next
+    slow = slow.Next
+}
