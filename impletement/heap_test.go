@@ -7,12 +7,12 @@ import (
 
 func TestHeap(t *testing.T) {
 	heap := NewHeap()
-	heap.Insert(3)
-	heap.Insert(4)
-	heap.Insert(6)
-	heap.Insert(5)
-	heap.Insert(2)
+	heap.Push(3)
+	heap.Push(4)
+	heap.Push(6)
+	heap.Push(5)
+	heap.Push(2)
 	fmt.Println(heap.Peek())
-	fmt.Println(heap.Delete())
+	fmt.Println(heap.Pop())
 	fmt.Println(heap.Peek())
 }

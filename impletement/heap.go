@@ -39,13 +39,13 @@ func (h *Heap) Size() int {
 	return h.size
 }
 
-func (h *Heap) Insert(v int) {
+func (h *Heap) Push(v int) {
 	h.nums = append(h.nums, v)
 	h.size++
 	h.swim(h.size)
 }
 
-func (h *Heap) Delete() int {
+func (h *Heap) Pop() int {
 	max := h.nums[1]
 	h.nums[h.size], h.nums[1] = h.nums[1], h.nums[h.size]
 	h.size--

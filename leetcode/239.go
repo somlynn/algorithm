@@ -2,47 +2,19 @@ package leetcode
 
 import (
 	"container/heap"
-	"math"
 )
 
 /*
 	滑动窗口最大值
 */
 
-// 超出时间限制，对于随机的数组执行挺快，但是最坏情况就退化为O(n^2)
-func maxSlidingWindow(nums []int, k int) []int {
-	size := len(nums)
-	if size == 0 {
-		return []int{}
-	}
-	res := make([]int, size-k+1)
-	maxIdx, maxVal := -1, math.MinInt32
-	for i := 0; i < size-k+1; i++ {
-		if maxIdx >= i {
-			if nums[i+k-1] > maxVal {
-				maxVal = nums[i+k-1]
-				maxIdx = i + k - 1
-			}
-		} else {
-			maxVal = nums[i]
-			for j := i; j < i+k; j++ {
-				if maxVal < nums[j] {
-					maxVal = nums[j]
-					maxIdx = j
-				}
-			}
-		}
-		res[i] = maxVal
-	}
-	return res
-}
-
 // 双向队列、单调递减队列
 // 1、从左向右遍历元素
 // 2、队列的最右端始终保存当前元素，队列从右向左都是大于当前元素的数的下标，
 // 3、队列中最大的数，即队列最左端，与当前元素的距离是否小于等于K，即最大的数是否在窗口内。如果不在，缩小窗口的左端。
 // 4、如果在窗口内，并且已经形成了长度为K的窗口，即i+1 >= k 则加入结果集内
-func maxSlidingWindow2(nums []int, k int) []int {
+//  时间复杂度O(n),每一个下标恰好被放入队列一次，并且最多被弹出队列一次，因此时间复杂度为 O(n).空间复杂度为O(k)
+func maxSlidingWindow(nums []int, k int) []int {
 	if len(nums) == 1 {
 		return nums
 	}
@@ -99,7 +71,7 @@ func (h *maxHeap) Pop() interface{} {
 
 // 优先队列
 // 时间复杂度为 O(nlogk)，空间复杂度为O(n)
-func maxSlidingWindow3(nums []int, k int) []int {
+func maxSlidingWindow2(nums []int, k int) []int {
 	h := &maxHeap{}
 	// 先初始化
 	for i := 0; i < k; i++ {
